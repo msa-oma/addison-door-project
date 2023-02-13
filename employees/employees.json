@@ -1,0 +1,39 @@
+{
+    "empolyee": [
+        {
+            "employee-barCode": "1988",
+            "jobTitleName": "automation eng ",
+            "firstName": "SADEK",
+            "lastName": "Gazali",
+            "region": "syria"
+        },
+        {
+            "employee-barCode": "1070",
+            "jobTitleName": "supervisore ",
+            "firstName": "Ibrahim",
+            "lastName": "farag",
+            "region": "egypt"
+        },
+        {
+            "employee-barCode": "2050",
+            "jobTitleName": "worker ",
+            "firstName": "majd",
+            "lastName": "eee",
+            "region": "sudani"
+        },
+        {
+            "employee-barCode": "2060",
+            "jobTitleName": "worker ",
+            "firstName": "khald",
+            "lastName": "fff",
+            "region": "egypt"
+        },
+        {
+            "employee-barCode": "3060",
+            "jobTitleName": "worker ",
+            "firstName": "dani",
+            "lastName": "dede",
+            "region": "syria"
+        }
+    ]
+}

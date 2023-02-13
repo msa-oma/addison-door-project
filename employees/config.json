@@ -1,0 +1,7 @@
+{
+    "permissions":["green","emergency","normal","task"],
+    "allowed emp out":3,
+    "allowed times out for emp":3,
+    "durations sum":35
+
+}
