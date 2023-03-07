@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="demo">
+<h1>The XMLHttpRequest Object</h1>
+
+<button type="button" onclick="loadDoc(0)">Idle mode</button>
+<button type="button" onclick="loadDoc(1)">Active mode</button>
+</div>
+<form action="/action_page.php">
+    <p>Please select your favorite Web language:</p>
+    <input type="radio" id="idle" name="mode" value="IDLE">
+    <label for="idle"> Idle mode: Always open.</label><br>
+    <input type="radio" id="active" name="mode" value="ACTIVE">
+    <label for="active">Active mode: Recording every in/out form the Hall.</label><br>
+    <input type="radio" id="task" name="mode" value="TASK">
+    <label for="task">Task mode: Recording every in/out form the Hall as task.</label><br>  
+    <input type="submit" value="Submit">
+  </form>
+
+<script>
+function loadDoc(x) {
+    const xhr = new XMLHttpRequest();
+    if(x==0)
+    {
+xhr.open('GET', '/Idle', true);
+    }else{
+xhr.open('GET', '/ctive', true);        
+    }
+
+
+xhr.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      //document.getElementById("demo").innerHTML =
+      alert(this.responseText);
+    }
+  };
+xhr.send('jjhhhh');
+ }
+</script>
+
+</body>
+</html>

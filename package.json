@@ -1,16 +1,29 @@
 {
   "name": "communicating-with-the-serial-port",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "@serialport/parser-readline": "^8.0.6",
+    "express": "^4.18.2",
     "mqtt": "^4.3.7",
-    "serialport": "^8.0.8"
-  }
+    "mysql": "^2.18.1",
+    "serialport": "^8.0.8",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msa-oma/addisonDoorProject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/msa-oma/addisonDoorProject/issues"
+  },
+  "homepage": "https://github.com/msa-oma/addisonDoorProject#readme",
+  "keywords": [],
+  "description": ""
 }
