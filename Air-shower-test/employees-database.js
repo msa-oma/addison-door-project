@@ -1,6 +1,7 @@
 var mysql = require("mysql");
 
 //creating a connection to the database.
+
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -35,14 +36,14 @@ class EmployeeStatus {
   }
 }
 var myemployee = new EmployeeStatus();
-myemployee.barcode = 12312;
+myemployee.barcode = 4042;
 myemployee.IsOutside = true;
 myemployee.TimeStamp_Out = 123;
-myemployee.TimeStamp_In = 456;
+myemployee.TimeStamp_In = 123;
 myemployee.Times = 2;
 myemployee.TolatTimeSpentOut = 5;
-myemployee.out_stamps=[123,123,123];
-myemployee.in_stamps=[321,321,321];
+myemployee.out_stamps = [123, 123, 123];
+myemployee.in_stamps = [321, 321, 321];
 
 
 
@@ -51,27 +52,28 @@ function set_object(myemployee) {
   temp_employee = myemployee;
 
 
-  // barcodeTemp = temp_employee.barcode;
-  // IsOutsideTemp = temp_employee.IsOutside;
-  // TimeStamp_OutTemp = temp_employee.TimeStamp_Out;
-  // TimeStamp_InTemp = temp_employee.TimeStamp_In;
-  // TimesTemp = temp_employee.Times;
-  // TolatTimeSpentOutTemp = temp_employee.TolatTimeSpentOut;
+  barcodeX = temp_employee.barcode;
+  IsOutsideX = temp_employee.IsOutside;
+  TimeStamp_OutX = temp_employee.TimeStamp_Out;
+  TimeStamp_InX = temp_employee.TimeStamp_In;
+  TimesX = temp_employee.Times;
+  TolatTimeSpentOutX = temp_employee.TolatTimeSpentOut;
 
-  var toJson = JSON.stringify(temp_employee);
-  jsonObj = JSON.parse(toJson);
+  // var toJson = JSON.stringify(temp_employee);
+  // jsonObj = JSON.parse(toJson);
 
-  console.log(jsonObj);
-  const qq = 'INSERT INTO `employee-status` (`barcode`, `Timestamp Out`, `Timestamp In`, `Total Time Spent Out`, `Is Outside`, `Times`, `date`) \
-   VALUES (?,?,?,?,?,?, current_timestamp())';
+  const queryx = 'INSERT INTO `employee-status` (`barcode`, `Timestamp Out`, `Timestamp In`, `Total Time Spent Out`, `Is Outside`, `Times`,`out stamps`,`in stamps`, `date`) \
+   VALUES (?,?,?,?,?,?,?,?,current_timestamp())';
+  const out_stamps_x = temp_employee.out_stamps.toString();
+  const in_stamps_x = temp_employee.in_stamps.toString();
 
-
-  var q = "SELECT * FROM `employee-status`WHERE barcode=barcodeTemp  ";
   con.connect(function (err) {
     if (err) throw err;
 
-    con.query(qq,
-      [jsonObj.barcode, jsonObj.TimeStamp_Out, jsonObj.TimeStamp_In, jsonObj.TolatTimeSpentOut, jsonObj.IsOutside, jsonObj.Times]
+    con.query(queryx,
+      [barcodeX, TimeStamp_OutX,
+        TimeStamp_InX, TolatTimeSpentOutX,
+        IsOutsideX, TimesX, out_stamps_x, in_stamps_x]
       , function (err, result, fields) {
         if (err) throw err;
         console.log(result);
@@ -81,6 +83,7 @@ function set_object(myemployee) {
   });
 
   console.log("here you go..");
+
 }
 // con.connect(function(err) {
 //   if (err) throw err;
@@ -164,19 +167,97 @@ con.connect(function(err) {
 //   });
 // });
 
-// i need insert record into table
-//get this from employee map
-//need class take barcode as parameter
-//function to get values from map recording to the barcode
-// and do the query statement
+//set_object(myemployee);
 
-// class EmployeeSttinserting{
-//   constructor(barcode){
-//     this.barcode=barcode
-//   }
 
-//   checkx(barcode){
-//    }
-// }
+function checkIfExist(myemployee) {
+  // get the query result and print it 
+  //SElECT * FROM `employee-status` WHERE barcode = 'myemployee.barcode' AND date=CURDATE()
+  //if(myemployee.barcode==result){continue...}
+  // the select query must have barcode and currentdate conditions
+  // look at this SELECT count(*) FROM commands WHERE barcode = 'myemployee.barcode' FOR EXAMPLE
+  var x = new EmployeeStatus();
+  x = myemployee;
 
-set_object(myemployee);
+  con.connect(function (err) {
+    if (err) throw err;
+    // work on this one
+    barcodeX = x.barcode;
+    IsOutsideX = x.IsOutside;
+    TimeStamp_OutX = x.TimeStamp_Out;
+    TimeStamp_InX = x.TimeStamp_In;
+    TimesX = x.Times;
+    TolatTimeSpentOutX = x.TolatTimeSpentOut;
+    const out_stamps_x = x.out_stamps.toString();
+    const in_stamps_x = x.in_stamps.toString();
+
+    const insert_queryx = 'INSERT INTO `employee-status` \
+  (`barcode`, `Timestamp Out`, `Timestamp In`, `Total Time Spent Out`,\
+   `Is Outside`, `Times`,`out stamps`,`in stamps`, `date`) \
+  VALUES (?,?,?,?,?,?,?,?,current_timestamp())';
+
+  const del_queryx = 'DELETE FROM `employee-status` WHERE barcode= (?) AND date =CURDATE()';
+
+    // Check if employee Exist in database   
+    con.query("SELECT * FROM `employee-status` WHERE barcode= (?) AND date =CURDATE()  ", [barcodeX], function (err, result, fields) {
+      if (err) throw err;
+      let resultx = Object.values(JSON.parse(JSON.stringify(result)));
+      resultx.forEach((v, k) => { console.log(v); });
+
+      if (resultx.length == 1) {   //employee Exist in database 
+
+        console.log('EMPLOYEE ALREADY EXIST :)')
+
+        console.log(resultx.length);
+        con.query(del_queryx,
+          [barcodeX]
+          , function (err, result, fields) {
+            if (err) throw err;
+             let resultx = Object.values(JSON.parse(JSON.stringify(result)));
+          //  resultx.forEach((v) => console.log(v));
+          });
+          console.log('EMPLOYEE DELETED :(')
+
+        con.query(insert_queryx,
+          [barcodeX, TimeStamp_OutX,
+            TimeStamp_InX, TolatTimeSpentOutX,
+            IsOutsideX, TimesX, out_stamps_x, in_stamps_x]
+          , function (err, result, fields) {
+            if (err) throw err;
+             let resultx = Object.values(JSON.parse(JSON.stringify(result)));
+           // resultx.forEach((v) => console.log(v));
+          });
+
+          console.log('EMPLOYEE ADDED :)')
+
+
+
+      }
+
+
+      else {
+        console.log('EMPLOYEE NOT EXIST :(')
+        //Employee not exist
+        // so insert new record "employee object 
+        con.query(insert_queryx,
+          [barcodeX, TimeStamp_OutX,
+            TimeStamp_InX, TolatTimeSpentOutX,
+            IsOutsideX, TimesX, out_stamps_x, in_stamps_x]
+          , function (err, result, fields) {
+            if (err) throw err;
+             let resultx = Object.values(JSON.parse(JSON.stringify(result)));
+            //resultx.forEach((v) => console.log(v));
+          });
+          console.log('EMPLOYEE ADDED :)')
+
+      }
+    });
+  });
+
+
+}
+
+
+
+
+checkIfExist(myemployee);
