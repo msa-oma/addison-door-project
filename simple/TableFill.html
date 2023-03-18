@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <style>
+table, th, td {
+  border: 1px solid black;
+}
+</style> -->
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(odd) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+
+<body>
+
+
+
+<button onclick="addRow()">Try it</button>
+<table id="myTable">
+<th >head1 </th>
+<th >head2 </th>
+<th >head3 </th>
+<th >head4 </th>
+</table>
+<script>
+var MohammedCounter=0;
+
+
+var n, door, door1;
+ var i=+i;
+ var Array=[];
+ door = {barcode:"0", time:"1", number:"2",outside:"true"};
+door1=door;
+ n=7;
+function addRow() {
+	for (i = 0; i < n; i++) 
+	{
+	Array[i]=door1;
+
+	  var MytableRow=document.createElement("tr");
+	var x;
+	
+			for ( x in Array[i])
+			{
+			 var MytableData=document.createElement("td"); 
+			 var textnode = document.createTextNode(Array[i][x]);
+			 
+			 MytableData.appendChild(textnode); 
+			 MytableRow.appendChild(MytableData);
+			 
+			 document.getElementById("myTable").appendChild(MytableRow);
+			 MytableData.setAttribute("id","MytableRowId"); 
+			 } 
+	}
+};
+function loadDoc() 
+{
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function ()		
+		{
+			//if (this.readyState == 4 && this.status == 200) 
+            {
+                document.getElementById("demo").innerHTML =JSON.stringify( this.responseText);
+                console.log(JSON.stringify( this.responseText));
+            }
+  //xhttp.setRequestHeader("Content-type", "application/json");//Content-Type: application/json
+
+    }
+    //xhttp.setRequestHeader("Content-type", "application/json");
+    //xhttp.setRequestHeader('Authorization', 'Bearer hefiafizepzgenozngopzngpzegn');
+    //xhttp.setRequestHeader("Auth","adasd");
+  //xhttp.setRequestHeader("wwwwww", "wwwwww");//Content-Type: application/json
+  xhttp.open("post","http://192.168.1.131:8888/GetTable");
+  
+  xhttp.send();
+}  
+
+
+
+
+
+</script>
+
+<p><strong>Note:</strong><br>First create an LI node,<br> then create a Text node,<br> then append the Text node to the LI node.<br>Finally append the LI node to the list.</p>
+
+</body>
+
+<!-- Mirrored from www.w3schools.com/jsref/tryit.asp?filename=tryjsref_node_appendchild by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 Jan 2020 03:02:17 GMT -->
+</html>
+
+Name: vscode-pdf
+Id: tomoki1207.pdf
+Description: Display pdf file in VSCode.
+Version: 1.2.2
+Publisher: tomoki1207
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=tomoki1207.pdf

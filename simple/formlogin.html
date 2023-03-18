@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <textarea id="textArea" rows="4" cols="50"></textarea>
+    <br>
+    <button onclick=" document.getElementById('textArea').value = '' ">clear</button>
+    <button onclick="sendToServer(document.getElementById('textArea').value)">send</button>
+    <br>
+    <p id="display"></p>
+
+    <script>
+    function sendToServer(data) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:8000/" +"?ggg="+ data, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById("display").innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    }
+    </script>
+</body>
+
+</html>

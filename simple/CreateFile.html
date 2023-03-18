@@ -1,0 +1,82 @@
+<!-- <html>
+<body>
+   <h2> Create a text file and save it to a local computer using JavaScript. </h2>
+   <p> Enter the file content:- </p>
+   <textarea> </textarea>
+   <br/>
+   <button onclick = "downloadFile()"> save File </button>
+   <script>
+      const downloadFile = () => {
+         const link = document.createElement("a");
+         const content = document.querySelector("textarea").value;
+         const file = new Blob([content], { type: 'text/plain' });
+         link.href = URL.createObjectURL(file);
+         link.download = "sample.txt";
+         link.click();
+         URL.revokeObjectURL(link.href);
+      };
+   </script>
+</body>
+</html> -->
+<!-- <html>
+<body>
+    <input type="file" id="file-input" >
+    <div id="file-content"></div>
+   <script>
+function readSingleFile(e) {
+  var file = e.target.files[0];
+  if (!file) {
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var contents = e.target.result;
+    // Display file content
+    displayContents(contents);
+  };
+  reader.readAsText(file);
+}
+ 
+function displayContents(contents) {
+  var element = document.getElementById('file-content');
+  element.innerHTML = contents;
+}
+ 
+document.getElementById('file-input').addEventListener('change', readSingleFile, false);
+   </script>
+</body>
+</html> -->
+<!-- <script>
+    //function readFile(file)
+     {
+   var x   =""  ;
+  const reader = new FileReader();
+  reader.addEventListener('load', (event) => {
+    const result = event.target.result;
+    // Do something with result
+     x=result;
+  });
+
+  reader.addEventListener('progress', (event) => {
+    if (event.loaded && event.total) {
+      const percent = (event.loaded / event.total) * 100;
+      console.log(`Progress: ${Math.round(percent)}`);
+    }
+  });
+  reader.readAsText("C:\\Users\\EEEI\\Desktop\\vvv.txt");
+}
+</script> -->
+<input type="file" onchange="readFile(this)">
+<script>
+function readFile(input) {
+let f = input.files[0];
+let reader = new FileReader();
+reader.readAsText(f);
+reader.onload = function() {
+console.log(reader.result);
+};
+reader.onerror = function() {
+console.log(reader.error);
+};
+}
+</script>
